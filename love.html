@@ -6,21 +6,21 @@
 <title>I Love You ❤️</title>
 
 <style>
-*{box-sizing:border-box}
-
+*{box-sizing:border-box; margin:0; padding:0;}
 body{
-    margin:0;
     height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(120deg,#ff9a9e,#fad0c4,#fecfef);
-    background-size:300% 300%;
-    animation:bgMove 8s ease infinite;
     font-family:'Segoe UI',sans-serif;
     overflow:hidden;
+    background:linear-gradient(120deg,#ff9a9e,#fad0c4,#fecfef);
+    background-size:300% 300%;
+    animation:bgMove 12s ease infinite;
+    position:relative;
 }
 
+/* Background gradient animation */
 @keyframes bgMove{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
@@ -30,13 +30,14 @@ body{
 /* Glass card */
 .card{
     background:rgba(255,255,255,0.25);
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(15px);
     border-radius:25px;
-    padding:50px 40px;
+    padding:50px 30px;
     text-align:center;
     box-shadow:0 20px 40px rgba(0,0,0,0.25);
     z-index:5;
     max-width:90%;
+    animation:fadeIn 1.5s ease forwards;
 }
 
 h1{
@@ -44,6 +45,7 @@ h1{
     color:#ff2e63;
     margin-bottom:10px;
     text-shadow:2px 4px 10px rgba(0,0,0,0.15);
+    animation:pulse 2s infinite;
 }
 
 .sub{
@@ -59,9 +61,8 @@ h1{
 }
 
 @keyframes pulse{
-    0%{transform:scale(1)}
-    50%{transform:scale(1.2)}
-    100%{transform:scale(1)}
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
 }
 
 button{
@@ -74,6 +75,8 @@ button{
     cursor:pointer;
     box-shadow:0 10px 25px rgba(255,75,92,0.5);
     transition:all 0.3s ease;
+    position:relative;
+    z-index:2;
 }
 
 button:hover{
@@ -90,11 +93,11 @@ button:hover{
 }
 
 @keyframes fadeIn{
-    from{opacity:0; transform:translateY(15px)}
-    to{opacity:1; transform:translateY(0)}
+    from{opacity:0; transform:translateY(15px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-/* Floating hearts */
+/* Floating hearts, roses, kisses */
 .floating-heart{
     position:absolute;
     bottom:-30px;
@@ -104,8 +107,8 @@ button:hover{
 }
 
 @keyframes floatUp{
-    0%{transform:translateY(0) scale(1); opacity:1}
-    100%{transform:translateY(-120vh) scale(1.5); opacity:0}
+    0%{transform:translateY(0) scale(1); opacity:1;}
+    100%{transform:translateY(-120vh) scale(1.5); opacity:0;}
 }
 
 /* Sparkles */
@@ -119,9 +122,18 @@ button:hover{
 }
 
 @keyframes sparkle{
-    0%{opacity:0; transform:scale(0)}
-    50%{opacity:1; transform:scale(1)}
-    100%{opacity:0; transform:scale(0)}
+    0%{opacity:0; transform:scale(0);}
+    50%{opacity:1; transform:scale(1);}
+    100%{opacity:0; transform:scale(0);}
+}
+
+/* Mobile Responsive */
+@media (max-width:480px){
+    h1{font-size:2rem;}
+    .sub{font-size:1rem;}
+    .big-heart{font-size:3rem;}
+    button{padding:12px 25px; font-size:1rem;}
+    #loveMessage{font-size:1.3rem;}
 }
 </style>
 </head>
@@ -129,7 +141,7 @@ button:hover{
 <body>
 
 <div class="card">
-    <h1>aww thank you samie ❤️</h1>
+    <h1>Aww thank you samie ❤️</h1>
     <div class="sub">You just made my whole day</div>
 
     <div class="big-heart">💖</div>
@@ -142,19 +154,20 @@ button:hover{
 </div>
 
 <script>
-/* Floating hearts */
-function createHeart(){
-    const heart=document.createElement("div");
-    heart.className="floating-heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(20+Math.random()*30)+"px";
-    heart.style.animationDuration=(4+Math.random()*4)+"s";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>heart.remove(),8000);
+/* Floating hearts, roses, kisses */
+const emojis = ["❤️","💖","🌹","💋"];
+function createFloatingEmoji(){
+    const emoji = document.createElement("div");
+    emoji.className = "floating-heart";
+    emoji.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+    emoji.style.left = Math.random()*100 + "vw";
+    emoji.style.fontSize = (20+Math.random()*30) + "px";
+    emoji.style.animationDuration = (4+Math.random()*4) + "s";
+    emoji.style.opacity = 0.5 + Math.random()*0.5;
+    document.body.appendChild(emoji);
+    setTimeout(()=>emoji.remove(),8000);
 }
-setInterval(createHeart,300);
+setInterval(createFloatingEmoji,200);
 
 /* Sparkles */
 for(let i=0;i<40;i++){
@@ -166,7 +179,7 @@ for(let i=0;i<40;i++){
     document.body.appendChild(s);
 }
 
-/* Button action */
+/* Show love message */
 function showLove(){
     document.getElementById("loveMessage").style.display="block";
 }
