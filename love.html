@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You</title>
+<style>
+    body { font-family:'Arial',sans-serif; background:linear-gradient(to right,#ff9a9e,#fecfef); display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; margin:0; overflow:hidden; text-align:center; position:relative; }
+    h1{ font-size:3rem; color:#ff4b5c; margin-bottom:30px; text-shadow:2px 2px 5px rgba(0,0,0,0.2); z-index:10; position:relative;}
+    .heart{ font-size:5rem;color:red; animation:pulse 1s infinite; position:relative; z-index:10;}
+    @keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
+    .floating-heart{ position:absolute; font-size:2rem; animation:float 5s linear infinite; opacity:0.8;}
+    @keyframes float{0%{transform:translateY(0) scale(1);opacity:1;}50%{transform:translateY(-200px) scale(1.2);opacity:0.8;}100%{transform:translateY(-400px) scale(1);opacity:0;}}
+    .kiss{ position:absolute; font-size:2rem; animation:flyKiss 4s linear infinite;}
+    @keyframes flyKiss{0%{transform:translate(0,0) rotate(0deg);opacity:1;}50%{transform:translate(300px,-200px) rotate(360deg);opacity:0.8;}100%{transform:translate(600px,-400px) rotate(720deg);opacity:0;}}
+    .bg-name{ position:absolute; font-size:10px; color:rgba(192,192,192,0.5); user-select:none; pointer-events:none;}
+    .yes-button{ padding:15px 30px; font-size:1.5rem; background-color:#ff4b5c; color:white; border:none; border-radius:10px; cursor:pointer; margin-top:20px; z-index:20;}
+    .yes-button:hover{background-color:#ff1a3c;}
+    #loveMessage{font-size:2rem; color:#ff0066; margin-top:30px; display:none; z-index:20;}
+</style>
+</head>
+<body>
+<h1>aww thankyou samie ❤️</h1>
+<div class="heart">💖</div>
+
+<button class="yes-button" onclick="showLove()">Yes, I Love You</button>
+<div id="loveMessage">You made my heart ❤️</div>
+
+<script>
+const heartColors=['#ff4b5c','#ff6b81','#ffc0cb','#ff8080'];
+for(let i=0;i<30;i++){
+    const heart=document.createElement('div');
+    heart.className='floating-heart';
+    heart.style.left=Math.random()*window.innerWidth+'px';
+    heart.style.animationDuration=(3+Math.random()*3)+'s';
+    heart.style.fontSize=(15+Math.random()*30)+'px';
+    heart.style.color=heartColors[Math.floor(Math.random()*heartColors.length)];
+    heart.innerText='❤️';
+    document.body.appendChild(heart);
+}
+
+const kiss=document.createElement('div');
+kiss.className='kiss';
+kiss.innerText='💋';
+kiss.style.left='0px';
+kiss.style.top='70%';
+document.body.appendChild(kiss);
+
+for(let i=0;i<100;i++){
+    const bgText=document.createElement('div');
+    bgText.className='bg-name';
+    bgText.innerText='SAMIE';
+    bgText.style.left=Math.random()*window.innerWidth+'px';
+    bgText.style.top=Math.random()*window.innerHeight+'px';
+    document.body.appendChild(bgText);
+}
+
+function showLove(){
+    document.getElementById('loveMessage').style.display='block';
+    alert("You clicked YES! ❤️");
+}
+</script>
+</body>
+</html>
